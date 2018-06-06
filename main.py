@@ -16,21 +16,31 @@ import webapp2
 import jinja2
 import os
 
-class Availability:
-    def __init__(self, type, name, email, from_date, to_date):
-        self.type = type
+class Reservation:
+    def __init__(self, client_type, name, email, from_date, to_date):
+        self.client_type = client_type
         self.name = name
         self.email = email
         self.from_date = from_date
         self.to_date = to_date
 
-availaibities = []
+reservations = []
 
 def find_dog_for_host(host):
-    pass
+    for reservation in reservations:
+        if reservation.client_type == 'dog' and \
+                reservation.from_date > host.from_date and \
+                reservation.to_date < host.to_date:
+            return reservation.email
+    return None
 
 def find_host_for_dog(dog):
-    pass
+    for reservation in reservations:
+        if reservation.client_type == 'host' and \
+                reservation.from_date < dog.from_date and \
+                reservation.to_date > dog.to_date:
+            return reservation.email
+    return None
 
 the_jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -49,6 +59,7 @@ class MatchHandler(webapp2.RequestHandler):
         email = self.request.get('email')
         from_date = self.request.get('client-from')
         to_date = self.request.get('client-to')
+        reservation = Reservation(client_type, name, email, from_date, to_date)
 
         # NO ERROR CHECKING FOR NOW
 
@@ -57,10 +68,16 @@ class MatchHandler(webapp2.RequestHandler):
         # food_record.put()
 
         # TODO: CHECK FOR MATCH
+        if client_type == 'host':
+            email_to_contact = find_dog_for_host(reservation)
+            if email_to_contact is None:
+                reservations.append(reservation)
+        elif client_type == 'dog':
+            email_to_contact = find_host_for_dog(reservation)
+            if email_to_contact is None:
+                reservations.append(reservation)
 
-        email = 'ThisIsFake@example.com'
-
-        variable_dict = {'email_to_contact': email}
+        variable_dict = {'email_to_contact': email_to_contact}
         match_template = the_jinja_env.get_template("templates/match.html")
         self.response.write(match_template.render(variable_dict))
 
