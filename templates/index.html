@@ -3,34 +3,45 @@
 
 <head>
   <title>Dog BnB</title>
+<style>
+body {
+  display: flex;
+  font-family: Roboto;
+}
+.main {
+  margin: auto;
+}
+</style>
 </head>
 
 <body>
-  <h1>Welcome to Dog BnB!</h1>
-  <form method="POST" action="/match">
-    <div class="input" name="client-type">
-      I am a
-      <select>
-        <option value="dog">Dog</option>
-        <option value="host">Host</option>
-      </select>
-    </div>
-    <div class="input">
-      <input type="text" name="client-name" placeholder="My Name"></input>
-    </div>
-    <div class="input">
-      <input type="email" name="client-email" placeholder="My Email Address"></input>
-    </div>
-    <div class="input">
-      I am free from
-      <input type="date" name="client-from"></input>
-      to
-      <input type="date" name="client-to"></input>
-    </div>
-    <div class="input">
-      <button action="submit">Go!</submit>
-    </div>
-  </form>
+  <div class="main">
+    <h1>Welcome to Dog BnB!</h1>
+    <form method="GET" action="/match">
+      <div class="input" name="client-type">
+        I am a
+        <select>
+          <option value="dog">Dog</option>
+          <option value="host">Host</option>
+        </select>
+      </div>
+      <div class="input">
+        <input type="text" name="client-name" placeholder="My Name"></input>
+      </div>
+      <div class="input">
+        <input type="email" name="client-email" placeholder="My Email Address"></input>
+      </div>
+      <div class="input">
+        I am free from
+        <input type="date" name="client-from"></input>
+        to
+        <input type="date" name="client-to"></input>
+      </div>
+      <div class="input">
+        <button action="submit">Go!</submit>
+      </div>
+    </form>
+  </div>
 </body>
 
 </html>
