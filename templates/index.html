@@ -11,6 +11,9 @@ body {
 .main {
   margin: auto;
 }
+.input {
+  margin: 12px 0;
+}
 </style>
 </head>
 
@@ -18,18 +21,20 @@ body {
   <div class="main">
     <h1>Welcome to Dog BnB!</h1>
     <form method="GET" action="/match">
-      <div class="input" name="client-type">
+      <div class="input">
         I am a
-        <select>
-          <option value="dog">Dog</option>
-          <option value="host">Host</option>
-        </select>
+        <input type="radio" name="client-type" value="dog" id="ct-dog">
+          <label for="ct-dog">Dog</label>
+        </input>
+        <input type="radio" name="client-type" value="host" id="ct-host">
+          <label for="ct-host">Host</label>
+        </input>
       </div>
       <div class="input">
-        <input type="text" name="client-name" placeholder="My Name"></input>
+        Name: <input type="text" name="client-name" placeholder="My Name"></input>
       </div>
       <div class="input">
-        <input type="email" name="client-email" placeholder="My Email Address"></input>
+        Email: <input type="email" name="client-email" placeholder="My Email Address"></input>
       </div>
       <div class="input">
         I am free from
