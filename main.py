@@ -16,17 +16,55 @@ import webapp2
 import jinja2
 import os
 
+class Availability:
+    def __init__(self, type, name, email, from_date, to_date):
+        self.type = type
+        self.name = name
+        self.email = email
+        self.from_date = from_date
+        self.to_date = to_date
+
+availaibities = []
+
+def find_dog_for_host(host):
+    pass
+
+def find_host_for_dog(dog):
+    pass
+
 the_jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
-class MainPage(webapp2.RequestHandler):
+class WelcomeHandler(webapp2.RequestHandler):
     def get(self):
         main_template = the_jinja_env.get_template('templates/index.html')
         self.response.write(main_template.render())
 
+class MatchHandler(webapp2.RequestHandler):
+    def get(self):
+        client_type = self.request.get('client-type')
+        name = self.request.get('name')
+        email = self.request.get('email')
+        from_date = self.request.get('client-from')
+        to_date = self.request.get('client-to')
+
+        # NO ERROR CHECKING FOR NOW
+
+        # put into database (optional)
+        # food_record = Food(food_name = the_fav_food)
+        # food_record.put()
+
+        # TODO: CHECK FOR MATCH
+
+        email = 'ThisIsFake@example.com'
+
+        variable_dict = {'email_to_contact': email}
+        match_template = the_jinja_env.get_template("templates/match.html")
+        self.response.write(match_template.render(variable_dict))
 
 app = webapp2.WSGIApplication([
-    ('/', MainPage),
+    ('/', WelcomeHandler),
+    ('/match', MatchHandler)
 ], debug=True)
