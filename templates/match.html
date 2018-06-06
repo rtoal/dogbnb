@@ -7,8 +7,15 @@
 
 <body>
   <!-- TODO: Switch between these two if there was a match or not -->
+  {% if email_to_contact %}
   <h1>You got a match!</h1>
+  <p>
+    Awesome! Check your email for details from your match.
+  </p> {% else %}
   <h1>You did not get a match!</h1>
+  <p>
+    Unfortunately we don't have a match ready for you at the moment, but you'll get an email once you've been matched.
+  </p> {% endif %}
   <!-- TODO: Include the match's email address. -->
 </body>
 
