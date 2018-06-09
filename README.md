@@ -1,5 +1,3 @@
-# AppEngine Starter Template
+# Dog BnB
 
-This beginner template has two files: `app.yaml` and `main.py`.
-
-run `dev_appserver.py app.yaml` to spin up a local server and see your app.
+Assigned during a training session for CSSI instructors, but hey, this might turn into a nice little example to give to the students.
